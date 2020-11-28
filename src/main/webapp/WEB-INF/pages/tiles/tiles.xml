@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="base-definition" template="/WEB-INF/pages/tiles/layout/defaultLayout.jsp">
+        
+        <put-attribute name="title" value=""></put-attribute>
+        
+        <put-attribute name="header" value="/WEB-INF/pages/tiles/template/defaultHeader.jsp"></put-attribute>
+        
+        <put-attribute name="footer" value="/WEB-INF/pages/tiles/template/defaultFooter.jsp"></put-attribute>
+        
+        <put-attribute name="menu" value="/WEB-INF/pages/tiles/template/defaultMenu.jsp"></put-attribute>
+        
+        <put-attribute name="body" value=""></put-attribute>
+        
+    </definition>
+
+    <!-- index page -->
+    <definition name="home" extends="base-definition">
+        <put-attribute name="title" value="bioskop"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/index.jsp"></put-attribute>
+    </definition>
+    
+    <!-- USER -->
+    <!-- login -->
+    <definition name="user/login" extends="base-definition">
+        <put-attribute name="title" value="login"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/user/login.jsp"></put-attribute>
+    </definition>
+    
+     <!-- register -->
+    <definition name="user/register" extends="base-definition">
+        <put-attribute name="title" value="register"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/user/register.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="user/confirm" extends="base-definition">
+        <put-attribute name="title" value="register"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/user/confirm.jsp"></put-attribute>
+    </definition>
+    
+    <!-- resend email -->
+    <definition name="user/resendEmail" extends="base-definition">
+        <put-attribute name="title" value="send"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/user/resendEmail.jsp"></put-attribute>
+    </definition>
+    
+    <!-- register zaposleni -->
+    <definition name="user/registerZaposleni" extends="base-definition">
+        <put-attribute name="title" value="register.zaposleni"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/pages/user/registerZaposleni.jsp"></put-attribute>
+    </definition>
+  
+        
+    <!-- SALA -->
+    <definition name="sala/home" extends="base-definition">
+        <put-attribute name="title" value="sala.home"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/sala/home.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="sala/add" extends="base-definition">
+        <put-attribute name="title" value="sala.add"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/sala/add.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="sala/view" extends="base-definition">
+        <put-attribute name="title" value="sala"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/sala/view.jsp">
+        </put-attribute>
+    </definition>
+    
+    <!-- FILM -->
+    <definition name="film/home" extends="base-definition">
+        <put-attribute name="title" value="film.home"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/film/home.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="film/add" extends="base-definition">
+        <put-attribute name="title" value="film.add"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/film/add.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="film/edit" extends="base-definition">
+        <put-attribute name="title" value="edit"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/film/edit.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="film/view" extends="base-definition">
+        <put-attribute name="title" value="film"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/film/view.jsp">
+        </put-attribute>
+    </definition>
+    
+    <!-- PROJEKCIJA -->
+    <definition name="projekcija/home" extends="base-definition">
+        <put-attribute name="title" value="projekcija.home"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/projekcija/home.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="projekcija/add" extends="base-definition">
+        <put-attribute name="title" value="projekcija.add"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/projekcija/add.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="projekcija/edit" extends="base-definition">
+        <put-attribute name="title" value="edit"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/projekcija/edit.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="projekcija/view" extends="base-definition">
+        <put-attribute name="title" value="projekcija"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/projekcija/view.jsp">
+        </put-attribute>
+    </definition>
+ 
+    <!-- KARTA -->
+    <definition name="karta/sell" extends="base-definition">
+        <put-attribute name="title" value="sell"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/karta/sell.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="karta/buy" extends="base-definition">
+        <put-attribute name="title" value="karta.kupi"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/karta/buy.jsp">
+        </put-attribute>
+    </definition>
+    
+    <!-- DISTRIBUTER -->
+    <definition name="distributer/view" extends="base-definition">
+        <put-attribute name="title" value="distributer"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/distributer/view.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="distributer/home" extends="base-definition">
+        <put-attribute name="title" value="distributer.home"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/distributer/home.jsp">
+        </put-attribute>
+    </definition>
+    
+    <definition name="distributer/add" extends="base-definition">
+        <put-attribute name="title" value="distributer.add"></put-attribute>
+        <put-attribute name="body"  value="/WEB-INF/pages/distributer/add.jsp">
+        </put-attribute>
+    </definition>
+    
+     
+    
+    
+    <!-- ##################################################################################### -->
+    <!-- EXCEPTION -->
+    <!--<definition name="error/globalException"
+                extends="base-definition">
+        <put-attribute name="title"
+                       value="Exception">
+        </put-attribute>
+        <put-attribute name="body"
+                       value="/WEB-INF/pages/error/globalException.jsp">
+        </put-attribute>
+    </definition>	
+	
+    -->
+
+
+</tiles-definitions>
