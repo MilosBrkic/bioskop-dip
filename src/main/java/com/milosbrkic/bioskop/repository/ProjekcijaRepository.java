@@ -40,6 +40,7 @@ public class ProjekcijaRepository extends AbstractRepository<Projekcija>{
     public Projekcija findById(int id){
         Projekcija p = entityManager.find(Projekcija.class, id);
         p.getKarte().size();
+        p.getSala().getRedovi().size();
         return p;
     }
 

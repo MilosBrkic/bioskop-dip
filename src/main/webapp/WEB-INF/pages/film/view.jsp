@@ -59,18 +59,50 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="zanroviSvi"><fmt:message key="zanrovi"/>:</label>
-                        <form:select multiple="false" path="" name="zanroviSvi" class="custom-select" id="zan1" size="8" disabled="true">
-                            <form:options items="${film.zanrovi}" itemValue="id" itemLabel="naziv"/>
-                        </form:select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="glumciSvi"><fmt:message key="glumci"/>:</label>
-                        <form:select multiple="false" path="" name="glumciSvi" class="custom-select" id="glu1" size="8" disabled="true">
-                            <form:options items="${film.glumci}" itemValue="id" itemLabel="imePrezime"/>
-                        </form:select>
-                    </div>
+                        <label for="zanroviSvi"><b><fmt:message key="zanrovi"/>:</b></label>
+                        <c:forEach items="${film.zanrovi}"
+                            var="zanr"
+                            varStatus="loop">
+                            ${zanr.naziv}<c:if test="${loop.index + 1 < film.zanrovi.size()}">,</c:if>                
+                        </c:forEach>
+                    </div>      
+                        
+                    <div class="form-group">  
+                        <label for="zanroviSvi"><b><fmt:message key="glumci"/>:</b></label>
+                        <c:forEach items="${film.glumci}"
+                            var="glumac"
+                            varStatus="loop">
+                            ${glumac.imePrezime}<c:if test="${loop.index + 1 < film.glumci.size()}">,</c:if>                
+                        </c:forEach>    
+                     </div>  
+                    
+                        
+                                                                                  
+                    <c:if test="${!projekcije.isEmpty()}">
+                        <label for="projekcije"><b><fmt:message key="projekcije"/>:</b></label>    
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><fmt:message key="datum"/></th>
+                                    <th scope="col"><fmt:message key="vreme"/></th>
+                                    <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>                      
+                            <c:forEach items="${projekcije}"
+                                var="pro"
+                                varStatus="loop">
+                                <tr>
+                                    <td>${pro.getFormatDatum()}</td>
+                                    <td>${pro.getFormatVreme()}</td>                              
+                                    <td><a href="${pageContext.request.contextPath}/projekcija/${pro.id}/view/"><fmt:message key="view"/></a></td>
+                                </tr>     
+                            </c:forEach> 
+                          </tbody>
+                        </table>    
+                    </c:if>            
+                       
+                        
 
                     <div class="custom-control custom-checkbox">
                         <form:checkbox path="aktivan" class="custom-control-input" id="aktivan" value="${film.aktivan}" disabled="true"/>

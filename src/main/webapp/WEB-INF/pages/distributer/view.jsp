@@ -35,10 +35,35 @@
         <div class="form-group">    
             <label for="sedista"><b>Email</b>: ${distributer.email}</label>
         </div>
-
-        <sec:authorize  access="hasAuthority('ZAPOSLENI')">                 
-            <a class="btn btn-danger" href="<c:url value = "/distributer/${distributer.id}/delete/"></c:url>"><fmt:message key="delete" /></a>            
-        </sec:authorize>
-            
+        
+        <c:if test="${distributer.filmovi.isEmpty()}">
+            <sec:authorize  access="hasAuthority('ZAPOSLENI')">                 
+                <a class="btn btn-danger mb-2" href="<c:url value = "/distributer/${distributer.id}/delete/"></c:url>"><fmt:message key="delete" /></a>            
+            </sec:authorize>
+        </c:if>
+                
+        <c:if test="${!distributer.filmovi.isEmpty()}">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col"><fmt:message key="film.naziv"/></th>
+                        <th scope="col"><fmt:message key="godina"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach
+                        items="${distributer.filmovi}"
+                        var="film"
+                        varStatus="loop">
+                        <tr>
+                            <td>${loop.index+1}</td>
+                            <td><a href="<c:url value = "/film/${film.id}/view/"></c:url>">${film.getNaziv()}</a></td>
+                            <td>${film.godina}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>         
     </div>
 </div>

@@ -8,10 +8,12 @@ package com.milosbrkic.bioskop.controller;
 import com.milosbrkic.bioskop.domen.Distributer;
 import com.milosbrkic.bioskop.domen.Film;
 import com.milosbrkic.bioskop.domen.Osoba;
+import com.milosbrkic.bioskop.domen.Projekcija;
 import com.milosbrkic.bioskop.domen.Zanr;
 import com.milosbrkic.bioskop.service.DistributerService;
 import com.milosbrkic.bioskop.service.FilmService;
 import com.milosbrkic.bioskop.service.OsobaService;
+import com.milosbrkic.bioskop.service.ProjekcijaService;
 import com.milosbrkic.bioskop.service.ZanrService;
 import com.milosbrkic.bioskop.validator.FilmValidator;
 import java.io.File;
@@ -56,17 +58,19 @@ public class FilmController {
     private final DistributerService distributerService;
     private final ZanrService zanrDepository;
     private final OsobaService osobaService;
+    private final ProjekcijaService projekcijaService;
     
     private final FilmValidator filmValidator;
     private final MessageSource messageSource;    
     private final ServletContext context;
 
     @Autowired
-    public FilmController(FilmService filmService, DistributerService distributerService, ZanrService zanrDepository, OsobaService osobaService, FilmValidator filmValidator, MessageSource messageSource, ServletContext context) {
+    public FilmController(FilmService filmService, DistributerService distributerService, ZanrService zanrDepository, OsobaService osobaService, ProjekcijaService projekcijaService, FilmValidator filmValidator, MessageSource messageSource, ServletContext context) {
         this.filmService = filmService;
         this.distributerService = distributerService;
         this.zanrDepository = zanrDepository;
         this.osobaService = osobaService;
+        this.projekcijaService = projekcijaService;
         this.filmValidator = filmValidator;
         this.messageSource = messageSource;
         this.context = context;
@@ -76,6 +80,8 @@ public class FilmController {
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(filmValidator);
     }
+
+    
           
     @GetMapping
     public ModelAndView home() {
@@ -98,6 +104,9 @@ public class FilmController {
     @GetMapping(path = "add")
     public ModelAndView add() {
         ModelAndView model = new ModelAndView("film/add");
+        model.addObject("osobe", osobaService.getAll());
+        model.addObject("zanroviSvi", zanrDepository.getAll());
+        model.addObject("distributeri", distributerService.getAll());
         return model;
     }    
     
@@ -120,15 +129,19 @@ public class FilmController {
     public ModelAndView edit(@PathVariable(name = "numberId") int numberId) {
         ModelAndView model = new ModelAndView("film/edit");        
         Film film = filmService.findById(numberId);
-        //model.addObject("osobe", osobaService.getAll());
+        model.addObject("osobe", osobaService.getAll());
+        model.addObject("zanroviSvi", zanrDepository.getAll());
+        model.addObject("distributeri", distributerService.getAll());
         model.addObject("film", film);
         return model;
     }
     
     @GetMapping(path = "/{numberId}/view")
-    public ModelAndView view(@PathVariable(name = "numberId") int numberId) {
+    public ModelAndView view(@PathVariable(name = "numberId") int id) {
         ModelAndView model = new ModelAndView("film/view");      
-        Film film = filmService.findById(numberId);;
+        Film film = filmService.findById(id);
+        List<Projekcija> projekcije = projekcijaService.findByQuery("SELECT p from Projekcija p where p.film = "+id +" AND p.datum >= NOW() order by p.datum desc, p.vreme desc");
+        model.addObject("projekcije", projekcije);
         model.addObject("film", film);
         return model;
     }
@@ -212,7 +225,7 @@ public class FilmController {
         return new Film();
     }
     
-    @ModelAttribute(name = "distributeri")
+    /*@ModelAttribute(name = "distributeri")
     private List<Distributer> getDistributeri() {
         return distributerService.getAll();
     }
@@ -227,8 +240,8 @@ public class FilmController {
         return osobaService.getAll();
     }*/
     
-    @ModelAttribute(name = "zanroviSvi")
+    /*@ModelAttribute(name = "zanroviSvi")
     private List<Zanr> getZanrovi() {
         return zanrDepository.getAll();
-    }
+    }*/
 }

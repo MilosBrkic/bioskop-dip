@@ -7,9 +7,6 @@ package com.milosbrkic.bioskop.repository;
 
 import com.milosbrkic.bioskop.domen.Distributer;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +27,9 @@ public class DistributerRepository extends AbstractRepository<Distributer>{
     
     @Override
     public Distributer findById(int id) {
-        return entityManager.find(Distributer.class, id);
+        Distributer d = entityManager.find(Distributer.class, id);
+        d.getFilmovi().size();
+        return d;
     }
 
     @Override

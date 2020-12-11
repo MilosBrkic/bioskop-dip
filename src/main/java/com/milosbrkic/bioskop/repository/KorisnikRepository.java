@@ -56,7 +56,7 @@ public class KorisnikRepository extends AbstractRepository<Korisnik>{
     
     public void deleteExpired(){
         try{
-        entityManager.createQuery("delete from Korisnik k where k.status = 'neaktivan' and k.id IN (select t.korisnik from ConfirmationToken t where t.datumIsteka < NOW())").executeUpdate();
+        entityManager.createQuery("delete from Korisnik k where k.status = 'neaktivan' and k.id IN (select t.korisnik from Token t where t.datumIsteka < NOW())").executeUpdate();
         }
         catch(Exception e){
             System.out.println(e.getMessage());

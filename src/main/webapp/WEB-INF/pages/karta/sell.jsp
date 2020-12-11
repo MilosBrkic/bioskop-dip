@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="sala"><b><fmt:message key="vreme"/>:</b> ${korpa.projekcija.vreme}</label>
+                    <label for="sala"><b><fmt:message key="vreme"/>:</b> ${korpa.projekcija.getFormatVreme()} (${korpa.projekcija.film.trajanje} min)</label>
                 </div>
                 
                 <div class="form-group">

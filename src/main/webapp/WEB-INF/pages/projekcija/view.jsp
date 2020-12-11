@@ -26,11 +26,27 @@
                         <label for="projekcija"><b>ID:</b> ${projekcija.id}</label>                       
                     </div>
 
-                    <div class="form-group">
-                        <label for="film"><b><fmt:message key="film.naziv"/>:</b></label>
-                        <a href="${pageContext.request.contextPath}/film/${projekcija.film.id}/view/">${projekcija.film.naziv}</a>
-                    </div>
+                    <div class="row border rounded bg-light p-1">
+                        <div class="col-8">
+                            <div class="form-group">
+                                <label for="film"><b><fmt:message key="film.naziv"/>:</b></label>
+                                <a href="${pageContext.request.contextPath}/film/${projekcija.film.id}/view/">${projekcija.film.naziv}</a>
+                            </div> 
 
+                            <div class="form-group">
+                                <label for="reziser"><b><fmt:message key="reziser"/></b>: ${projekcija.film.reziser.imePrezime}</label>
+                            </div>   
+
+                            <div class="form-group">    
+                                <label for="opis"><b><fmt:message key="film.opis"/></b>:</label>
+                                <p id="opis">${projekcija.film.opis}</p>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center border align-items-center"> 
+                            <img src="<c:url value = "/film/getImage/${projekcija.film.id}"/>" class="img-fluid rounded" alt="<fmt:message key="slika.null"/>"> 
+                        </div>   
+                    </div>
+                    
                     <div class="form-group">
                         <label for="sala"><b><fmt:message key="sala"/>:</b></label>
                         <a href="${pageContext.request.contextPath}/sala/${projekcija.sala.brojSale}/view/">${projekcija.sala}</a>                      
@@ -41,7 +57,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="sala"><b><fmt:message key="vreme"/>:</b> ${projekcija.vreme}</label>
+                        <label for="sala"><b><fmt:message key="vreme"/>:</b> ${projekcija.getFormatVreme()} (${projekcija.film.trajanje} min)</label>
                     </div>
                     
                     <div class="form-group">
@@ -73,7 +89,7 @@
             <div class="col-sm">  
                 <br>
                 <h5><fmt:message key="karta.prodate"/>:</h5>
-                <table class="table table-hover">
+                <table class="table table-sm table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

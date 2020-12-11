@@ -35,7 +35,7 @@ public class Sala implements Serializable{
     
     @OneToMany(
         mappedBy="sala",
-        fetch = FetchType.EAGER,
+        fetch = FetchType.LAZY,
         cascade = CascadeType.ALL,
         orphanRemoval = false
     )   

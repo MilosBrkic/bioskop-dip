@@ -6,10 +6,14 @@
 package com.milosbrkic.bioskop.domen;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +31,15 @@ public class Distributer implements Serializable{
     private String telefon;
     private String email;
 
+    @OneToMany(
+        mappedBy="distributer",
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        orphanRemoval = false
+    )
+    private List<Film> filmovi;
+    
+    
     public Distributer(int id, String naziv, String telefon, String email) {
         this.id = id;
         this.naziv = naziv;
@@ -70,6 +83,16 @@ public class Distributer implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public List<Film> getFilmovi() {
+        return filmovi;
+    }
+
+    public void setFilmovi(List<Film> filmovi) {
+        this.filmovi = filmovi;
+    }
+    
+    
 
     @Override
     public String toString() {
