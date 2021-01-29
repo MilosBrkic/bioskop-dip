@@ -31,13 +31,13 @@ public class Distributer implements Serializable{
     private String telefon;
     private String email;
 
-    @OneToMany(
+    /*@OneToMany(
         mappedBy="distributer",
         fetch = FetchType.LAZY,
         cascade = CascadeType.ALL,
         orphanRemoval = false
     )
-    private List<Film> filmovi;
+    private List<Film> filmovi;*/
     
     
     public Distributer(int id, String naziv, String telefon, String email) {
@@ -84,13 +84,13 @@ public class Distributer implements Serializable{
         this.email = email;
     }
 
-    public List<Film> getFilmovi() {
+    /*public List<Film> getFilmovi() {
         return filmovi;
     }
 
     public void setFilmovi(List<Film> filmovi) {
         this.filmovi = filmovi;
-    }
+    }*/
     
     
 

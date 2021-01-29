@@ -37,7 +37,7 @@ public class TokenRepository extends AbstractRepository<Token>{
 
     @Override
     public void deleteById(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.createQuery("delete from Token t where t.id=:broj").setParameter("broj", id).executeUpdate();
     }
 
     @Override

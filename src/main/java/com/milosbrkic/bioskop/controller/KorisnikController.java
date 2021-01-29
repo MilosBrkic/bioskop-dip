@@ -67,21 +67,20 @@ public class KorisnikController {
 
         if (logout != null)
             model.addAttribute("message", messageSource.getMessage("logout.success", null, locale));
-        
+
         if(error != null){
             HttpSession session = request.getSession(false);
             if (session != null) {
-
                 AuthenticationException ex = (AuthenticationException) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-                if (ex != null && ex.getMessage() != null) 
-                    if(ex.getMessage().equals("Bad credentials"))
-                        model.addAttribute("error", messageSource.getMessage("username.password.invalid" ,null, locale));
-                    else {
-                        model.addAttribute("error", messageSource.getMessage("account.inactive", null, locale));
-                        model.addAttribute("resendLink", messageSource.getMessage("account.resend", null, locale));
-                    }
+                if (ex != null && ex.getMessage() != null && !ex.getMessage().equals("Bad credentials")){ 
+                    model.addAttribute("error", messageSource.getMessage("account.inactive", null, locale));
+                    model.addAttribute("resendLink", messageSource.getMessage("account.resend", null, locale));
+                }
+                else
+                    model.addAttribute("error", messageSource.getMessage("username.password.invalid" ,null, locale));
             }
         }
+
         return "user/login";
     }
     
@@ -134,16 +133,18 @@ public class KorisnikController {
     
     @GetMapping(value="/confirm-account")
     public ModelAndView confirmUserAccount(@RequestParam("token")String tokenValue, Locale locale){
-        ModelAndView model = new ModelAndView("user/confirm");         
+        ModelAndView model = new ModelAndView("user/confirm");  
+        System.out.println("==============="+tokenValue);
         try{
-            Token token = tokenService.findByQuery("select t from ConfirmationToken t where t.vrednost = '"+tokenValue+"'").get(0);
+            Token token = tokenService.findByQuery("select t from Token t where t.vrednost = '"+tokenValue+"'").get(0);
             Korisnik user = korisnikService.findById(token.getKorisnik().getId());
  
             user.setStatus("kupac");
             korisnikService.save(user);
             model.addObject("message",messageSource.getMessage("email.verification.success" ,null, locale));
         }
-        catch(Exception e){    
+        catch(Exception e){ 
+            System.out.println(e.getMessage());
             model.addObject("error",messageSource.getMessage("email.verification.error" ,null, locale));
         }
         return model;
@@ -158,12 +159,16 @@ public class KorisnikController {
     public ModelAndView resendToken(@RequestParam("email") String email, Locale locale){
         ModelAndView model = new ModelAndView("user/login");
         try{           
-            Korisnik korisnik = korisnikService.findByQuery("select k from Korisnik k where k.email = '"+email+"' and k.status = 'neaktivan' ").get(0);
+            Korisnik korisnik = korisnikService.findByQuery("select k from Korisnik k where k.email = '"+email+"' and k.status = 'neaktivan' ").get(0);           
             //stari token          
-            Token token = tokenService.findByQuery("select t from ConfirmationToken t where t.korisnik = "+korisnik.getId()).get(0);
-            long id = token.getId();
-            token = new Token(korisnik);
-            token.setId(id);
+            Token token = tokenService.findByQuery("select t from Token t where t.korisnik = "+korisnik.getId()).get(0);
+            if(token != null){
+                long id = token.getId();
+                token = new Token(korisnik);
+                token.setId(id);
+            }
+            else
+                token = new Token(korisnik);
             //update starog tokena sa novim datumom i vrednosti
             tokenService.save(token);
             sendEmail(email, token.getVrednost());                       
@@ -171,7 +176,7 @@ public class KorisnikController {
         catch(Exception e){
             System.out.println(e.getMessage());
         }
-        model.addObject("message",messageSource.getMessage("email.verification.send" ,null, locale));
+        model.addObject("message",messageSource.getMessage("email.verification.send" ,new Object[]{email}, locale));
         return model;
     }
     

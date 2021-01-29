@@ -65,7 +65,7 @@
                 
             <div class="form-group">
                 <label for="telefon"><fmt:message key="telefon"/>:</label>
-                <div><form:input type="tel" class="form-control" id="telefon" name="telefon" path="brojTelefona" required="true" maxlength="20"/></div>
+                <div><form:input type="tel" class="form-control" id="telefon" name="telefon" path="brojTelefona" required="true" placeholder="061 123456" pattern="[0-9]{3} [0-9]{6,7}"/></div>
                 <div class="text-danger">
                     <form:errors path="brojTelefona" cssClass="error" />
                 </div>

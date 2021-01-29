@@ -21,10 +21,14 @@ public class FilmRepository extends AbstractRepository<Film>{
       
     @Override
     public void save(Film film) {
-        int id = entityManager.merge(film).getId();
+        
+        /*System.out.println("======== osoba "+film.getReziser());
+        System.out.println("========= distruburer "+film.getDistributer());
+        System.out.println("========= distruburer "+film.getDistributer().getFilmovi());*/
+        /*int id = entityManager.merge(film).getId();
         entityManager.flush();
-        film.setId(id);
-        //entityManager.merge(film);
+        film.setId(id);*/
+        entityManager.merge(film);
     }
 
     @Override
@@ -41,8 +45,11 @@ public class FilmRepository extends AbstractRepository<Film>{
     @Override
     public Film findById(int id){
         Film f = entityManager.find(Film.class, id);
-        f.getZanrovi().size();
-        f.getGlumci().size();
+        if(f != null){
+            f.getZanrovi().size();
+            f.getGlumci().size();
+        }
+        
         return f;
     }
    

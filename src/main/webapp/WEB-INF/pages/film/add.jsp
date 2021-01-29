@@ -28,7 +28,7 @@
 
             <div class="form-group">    
                 <label for="trajanje"><fmt:message key="trajanje.minuti" />:</label>
-                <div><form:input type="number" class="form-control" id="trajanje" path="trajanje" min="0" max="9999"/></div>
+                <div><form:input type="number" class="form-control" id="trajanje" path="trajanje" min="0" max="9999" value="${film.trajanje}"/></div>
                 <div class="text-danger">
                     <form:errors path="trajanje" cssClass="error" />
                 </div>
@@ -36,7 +36,7 @@
                 
             <div class="form-group">    
                 <label for="godina"><fmt:message key="godina" />:</label>
-                <div><form:input type="number" class="form-control" id="godina" path="godina" min="0" max="999999" value="2000"/></div>
+                <div><form:input type="number" class="form-control" id="godina" path="godina" min="0" max="9999" value="${film.godina}"/></div>
                 <div class="text-danger">
                     <form:errors path="godina" cssClass="error" />
                 </div>
@@ -52,7 +52,7 @@
                 
             <div class="form-group">    
                 <label for="ocena"><fmt:message key="ocena" />:</label>
-                <div><form:input type="number" class="form-control" id="ocena" path="ocena" min="1" step=".1" max="10" value="5.0"/></div>
+                <div><form:input type="number" class="form-control" id="ocena" path="ocena" min="1" step=".1" max="10" value="${film.ocena}"/></div>
                 <div class="text-danger">
                     <form:errors path="ocena" cssClass="error" />
                 </div>
@@ -76,7 +76,7 @@
             <div class="form-group">  
                 <label for="reziser"><fmt:message key="reziser" />:</label>
                 <form:select name="reziser" path="reziser" class="form-control">              
-                    <form:options items = "${osobe}" itemLabel="imePrezime" itemValue="id" />
+                    <form:options items = "${osobe}" itemValue="id" itemLabel="imePrezime" />
                 </form:select>   
                 <div class="text-danger">
                     <form:errors path="reziser" cssClass="error" />

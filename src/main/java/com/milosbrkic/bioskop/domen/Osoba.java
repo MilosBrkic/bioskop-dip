@@ -55,6 +55,14 @@ public class Osoba implements Serializable{
     public void setDatumRodjenja(Date datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
     }
+
+    /*@Override
+    public String toString() {
+        return imePrezime;
+    }*/
     
+    public String getAbc(){
+        return toString();
+    }
     
 }

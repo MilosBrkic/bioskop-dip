@@ -6,8 +6,11 @@
 package com.milosbrkic.bioskop.controller;
 
 import com.milosbrkic.bioskop.domen.Distributer;
+import com.milosbrkic.bioskop.domen.Film;
 import com.milosbrkic.bioskop.service.DistributerService;
+import com.milosbrkic.bioskop.service.FilmService;
 import com.milosbrkic.bioskop.validator.DistributerValidator;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -34,12 +37,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class DistributerController {
     
     private final DistributerService distributerService;
+    private final FilmService filmService;
     private final DistributerValidator validator;
     private final MessageSource messageSource;
+    
 
     @Autowired
-    public DistributerController(DistributerService distributerService, DistributerValidator validator, MessageSource messageSource) {
+    public DistributerController(DistributerService distributerService, FilmService filmService, DistributerValidator validator, MessageSource messageSource) {
         this.distributerService = distributerService;
+        this.filmService = filmService;
         this.validator = validator;
         this.messageSource = messageSource;
     }
@@ -50,6 +56,8 @@ public class DistributerController {
         model.addObject("distributeri", distributerService.getAll());
         return model;
     }
+
+    
     
     @InitBinder
     private void initBinder(WebDataBinder binder) {
@@ -79,6 +87,8 @@ public class DistributerController {
     public ModelAndView view(@PathVariable(name = "numberId") int numberId) {
         ModelAndView model = new ModelAndView("distributer/view");  
         Distributer distributer = distributerService.findById(numberId);
+        List<Film> filmovi = filmService.findByQuery("SELECT f FROM Film f WHERE f.distributer = " +distributer.getId());
+        model.addObject("filmovi", filmovi);
         model.addObject("distributer", distributer);
         return model;
     }

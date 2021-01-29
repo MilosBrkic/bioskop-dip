@@ -28,7 +28,9 @@ public class ProjekcijaRepository extends AbstractRepository<Projekcija>{
     
     @Override
     public void save(Projekcija p){
+        System.out.println("===== projekcija pre id="+p.getId());
         entityManager.merge(p);
+        System.out.println("===== projekcija save id="+p.getId());
     }
     
     @Override

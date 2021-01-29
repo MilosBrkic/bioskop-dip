@@ -89,7 +89,7 @@ public class KorisnikService extends AbstractService<Korisnik, KorisnikRepositor
         return repository.findByQuery(query);
     }
     
-    @Scheduled(fixedDelay = 50000)
+    @Scheduled(fixedDelay = 300000)//5 minuta
     public void deleteExpired(){
         System.out.println("==========delete expired");
         repository.deleteExpired();

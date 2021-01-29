@@ -42,7 +42,7 @@
                                 <p id="opis">${projekcija.film.opis}</p>
                             </div>
                         </div>
-                        <div class="col-4 d-flex justify-content-center border align-items-center"> 
+                        <div class="col-4 d-flex justify-content-center  align-items-center"> 
                             <img src="<c:url value = "/film/getImage/${projekcija.film.id}"/>" class="img-fluid rounded" alt="<fmt:message key="slika.null"/>"> 
                         </div>   
                     </div>

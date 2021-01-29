@@ -104,9 +104,9 @@ public class FilmController {
     @GetMapping(path = "add")
     public ModelAndView add() {
         ModelAndView model = new ModelAndView("film/add");
-        model.addObject("osobe", osobaService.getAll());
+        /*model.addObject("osobe", osobaService.getAll());
         model.addObject("zanroviSvi", zanrDepository.getAll());
-        model.addObject("distributeri", distributerService.getAll());
+        model.addObject("distributeri", distributerService.getAll());*/
         return model;
     }    
     
@@ -116,6 +116,7 @@ public class FilmController {
             model.addAttribute("sala", film);
             return "film/add";
         } else {
+            film.setReziser(null);
             filmService.save(film);
             String message = messageSource.getMessage("film.save" ,null, locale);
             redirectAttributes.addFlashAttribute("message", message);
@@ -129,9 +130,9 @@ public class FilmController {
     public ModelAndView edit(@PathVariable(name = "numberId") int numberId) {
         ModelAndView model = new ModelAndView("film/edit");        
         Film film = filmService.findById(numberId);
-        model.addObject("osobe", osobaService.getAll());
+        /*model.addObject("osobe", osobaService.getAll());
         model.addObject("zanroviSvi", zanrDepository.getAll());
-        model.addObject("distributeri", distributerService.getAll());
+        model.addObject("distributeri", distributerService.getAll());*/
         model.addObject("film", film);
         return model;
     }
@@ -170,6 +171,7 @@ public class FilmController {
             //redirectAttributes.addFlashAttribute("film", film);
             return "film/edit";
         } else {
+            //System.out.println("ucitavanje = "+film.getDistributer().getFilmovi());
             filmService.save(film);
             redirectAttributes.addFlashAttribute("message", messageSource.getMessage("film.update" ,null, locale));
             saveImage(film.getId(), film.getUrl());
@@ -225,23 +227,20 @@ public class FilmController {
         return new Film();
     }
     
-    /*@ModelAttribute(name = "distributeri")
+    @ModelAttribute(name = "distributeri")
     private List<Distributer> getDistributeri() {
-        return distributerService.getAll();
+        List<Distributer> lista  =distributerService.getAll();
+        //System.out.println("ucitavanje = "+lista.get(0).getFilmovi());
+        return lista;
     }
     
     @ModelAttribute(name = "osobe")
     private List<Osoba> getOsobe() {
         return osobaService.getAll();
     }
-    
-    /*@ModelAttribute(name = "reziseri")
-    private List<Osoba> getReziseri() {
-        return osobaService.getAll();
-    }*/
-    
-    /*@ModelAttribute(name = "zanroviSvi")
+     
+    @ModelAttribute(name = "zanroviSvi")
     private List<Zanr> getZanrovi() {
         return zanrDepository.getAll();
-    }*/
+    }
 }

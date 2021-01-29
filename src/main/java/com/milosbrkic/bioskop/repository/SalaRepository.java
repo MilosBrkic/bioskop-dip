@@ -40,7 +40,8 @@ public class SalaRepository extends AbstractRepository<Sala>{
     @Override
     public Sala findById(int id){     
         Sala s = entityManager.find(Sala.class, id);
-        s.getRedovi().size();
+        if(s != null)
+            s.getRedovi().size();
         return s;    
     }
 

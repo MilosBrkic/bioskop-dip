@@ -36,13 +36,13 @@
             <label for="sedista"><b>Email</b>: ${distributer.email}</label>
         </div>
         
-        <c:if test="${distributer.filmovi.isEmpty()}">
+        <c:if test="${filmovi.isEmpty()}">
             <sec:authorize  access="hasAuthority('ZAPOSLENI')">                 
                 <a class="btn btn-danger mb-2" href="<c:url value = "/distributer/${distributer.id}/delete/"></c:url>"><fmt:message key="delete" /></a>            
             </sec:authorize>
         </c:if>
                 
-        <c:if test="${!distributer.filmovi.isEmpty()}">
+        <c:if test="${!filmovi.isEmpty()}">
             <table class="table table-sm table-hover">
                 <thead>
                     <tr>
@@ -53,7 +53,7 @@
                 </thead>
                 <tbody>
                     <c:forEach
-                        items="${distributer.filmovi}"
+                        items="${filmovi}"
                         var="film"
                         varStatus="loop">
                         <tr>

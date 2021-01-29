@@ -28,7 +28,8 @@ public class DistributerRepository extends AbstractRepository<Distributer>{
     @Override
     public Distributer findById(int id) {
         Distributer d = entityManager.find(Distributer.class, id);
-        d.getFilmovi().size();
+        //if(d != null)
+          //  d.getFilmovi().size();
         return d;
     }
 

@@ -54,7 +54,7 @@ public class FilmValidator implements Validator{
         if(film.getZanrovi() == null || film.getZanrovi().isEmpty())
             errors.rejectValue("zanrovi", "film.zanrovi.size");
         
-        if(film.getGodina() < 0 || film.getGodina() > Year.now().getValue())
+        if(film.getGodina() < 1900 || film.getGodina() > Year.now().getValue())
             errors.rejectValue("godina", "film.godina.invalid");
         
         if(film.getOcena() < 1 || film.getOcena() > 10)

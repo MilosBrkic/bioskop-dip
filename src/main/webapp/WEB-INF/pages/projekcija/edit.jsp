@@ -39,6 +39,9 @@
                     <form:options items = "${sale}"  itemValue="brojSale" />
                 </form:select>   
             </div>
+            <div class="text-danger">
+                <form:errors path="sala" cssClass="error" />
+            </div>    
                 
              <div class="form-group">
                 <label for="datum"><fmt:message key="datum"/>:</label>

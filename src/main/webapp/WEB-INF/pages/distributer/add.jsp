@@ -30,7 +30,7 @@
 
             <div class="form-group">    
                 <label for="telefon"><fmt:message key="telefon"/>:</label>
-                <div><form:input type="text" class="form-control" id="telefon" path="telefon" required="true"/></div>
+                <div><form:input type="tel" class="form-control" id="telefon" path="telefon" required="true" placeholder="061 123456" pattern="[0-9]{3} [0-9]{6,7}"/></div>
                 <div class="text-danger">
                     <form:errors path="telefon" cssClass="error" />
                 </div>

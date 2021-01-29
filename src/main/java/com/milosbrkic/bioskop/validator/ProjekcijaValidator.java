@@ -50,11 +50,15 @@ public class ProjekcijaValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Projekcija projekcija = (Projekcija) o;
         
-        if(projekcija.getDatum() == null)
+        if(projekcija.getDatum() == null){
             errors.rejectValue("datum", "projekcija.datum.empty");
+            return;
+        }
         
-        if(projekcija.getVreme()== null)
+        if(projekcija.getVreme()== null){
             errors.rejectValue("vreme", "projekcija.vreme.empty");
+            return;
+        }
         
         if(projekcija.getDatum() != null && projekcija.getVreme()!= null && Common.isInPast(projekcija)){
             errors.rejectValue("datum", "projekcija.datum.past");
@@ -107,6 +111,20 @@ public class ProjekcijaValidator implements Validator {
                 }
             }
         }
+        
+        //nije dozvoljeno menjati salu ako su prodate karte
+        if (projekcija.getId() != 0) {
+            Projekcija stara = projekcijaRepository.findById(projekcija.getId());
+            
+            if (stara.getSala().getBrojSale() != projekcija.getSala().getBrojSale() && !stara.getKarte().isEmpty())
+                errors.rejectValue("sala", "projekcija.sala.changeError");                    
+        }
+
+        
+        
+        
+        
+        
     }
     
 
