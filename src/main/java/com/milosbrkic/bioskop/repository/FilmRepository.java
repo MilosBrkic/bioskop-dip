@@ -22,13 +22,9 @@ public class FilmRepository extends AbstractRepository<Film>{
     @Override
     public void save(Film film) {
         
-        /*System.out.println("======== osoba "+film.getReziser());
-        System.out.println("========= distruburer "+film.getDistributer());
-        System.out.println("========= distruburer "+film.getDistributer().getFilmovi());*/
-        /*int id = entityManager.merge(film).getId();
+        int id = entityManager.merge(film).getId();
         entityManager.flush();
-        film.setId(id);*/
-        entityManager.merge(film);
+        film.setId(id);
     }
 
     @Override

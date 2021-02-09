@@ -21,12 +21,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PayPalConfig {
        
-    @Value("${paypal.client.id}")
-    private String clientID;
-    @Value("${paypal.client.secret}")
-    private String clientSecret;
+    //@Value("${paypal.client.id}")
+    private final String clientID = System.getenv("paypal.client.id");
+    //@Value("${paypal.client.secret}")
+    private final String clientSecret = System.getenv("paypal.client.secret");
     
-    private String mode = "sandbox";
+    private final String mode = "sandbox";
     
     @Bean
     public Map<String, String> paypalSdkConfig() {

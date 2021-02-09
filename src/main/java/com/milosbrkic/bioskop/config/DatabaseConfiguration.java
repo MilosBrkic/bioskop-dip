@@ -25,17 +25,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class DatabaseConfiguration {
 
-    @Value("${database.url}")
-    private String url;
+    //@Value("${database.url}")
+    private final String url = System.getenv("database.url");
+    
     
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");// mysql 
-        dataSource.setUrl(url);
-        dataSource.setUsername("root");
-        dataSource.setPassword("");
+        dataSource.setUrl("jdbc:"+url);
+
+        //dataSource.setUsername("root");
+        //dataSource.setPassword("");
 
         return dataSource;
     }

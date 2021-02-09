@@ -68,10 +68,10 @@ public class WebContextConfig implements WebMvcConfigurer {
     private final KorisnikRepository zaposleniRepository;
     private final OsobaRepository osobaRepository;
     
-    @Value("${email.username}")
-    private String username;
-    @Value("${email.password}")
-    private String password;
+    //@Value("${email.username}")
+    private String username = System.getenv("email.username");
+    //@Value("${email.password}")
+    private String password = System.getenv("email.password");
     
     @Autowired
     Environment env;
