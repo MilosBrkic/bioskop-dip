@@ -34,6 +34,7 @@ public class DatabaseConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         //dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");// mysql 
+        System.out.println("database url = "+url);
         dataSource.setUrl("jdbc:"+url);
 
         //dataSource.setUsername("root");

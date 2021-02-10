@@ -69,9 +69,9 @@ public class WebContextConfig implements WebMvcConfigurer {
     private final OsobaRepository osobaRepository;
     
     //@Value("${email.username}")
-    private String username = System.getenv("email.username");
+    private final String username = System.getenv("email.username");
     //@Value("${email.password}")
-    private String password = System.getenv("email.password");
+    private final String password = System.getenv("email.password");
     
     @Autowired
     Environment env;
@@ -140,7 +140,7 @@ public class WebContextConfig implements WebMvcConfigurer {
              
         StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
         decryptor.setPassword("bioskop");
-        
+        System.out.println("email username = "+username);
         javaMailSender.setUsername(username);
 	javaMailSender.setPassword(decryptor.decrypt(password));
                        
