@@ -115,7 +115,7 @@ public class WebContextConfig implements WebMvcConfigurer {
         messageSource.setFallbackToSystemLocale(false);
         return messageSource;
     }
-    
+    /*
     @Bean
     public static PropertySourcesPlaceholderConfigurer properties() {
         PropertySourcesPlaceholderConfigurer props = new PropertySourcesPlaceholderConfigurer();
@@ -123,7 +123,7 @@ public class WebContextConfig implements WebMvcConfigurer {
                 new ClassPathResource("application.properties")
         });
         return props;
-    }
+    }*/
     
     @Bean
     public LocaleResolver localeResolver() {
